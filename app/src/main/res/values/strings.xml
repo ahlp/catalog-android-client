@@ -3,4 +3,16 @@
     <string name="title_home">Home</string>
     <string name="title_explore">Explorar</string>
     <string name="title_profile">Perfil</string>
+    <string name="title_activity_serie_card">SerieCardActivity</string>
+    <string name="title_activity_card_serie">CardSerieActivity</string>
+    <string name="title_activity_content_mini_card_serie">content_mini_card_serie</string>
+    <string name="title_activity_user_details">UserDetails</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_empty_search">EmptySearchActivity</string>
+    <string name="title_activity_most_view">MostViewActivity</string>
+    <string name="title_activity_card_ep">CardEpActivity</string>
+    <string name="title_activity_card_user">CardUserActivity</string>
+    <string name="title_activity_search_list">SearchListActivity</string>
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CardUserActivity"
+    tools:showIn="@layout/activity_card_user">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="111dp"
+        android:layout_height="111dp"
+        app:srcCompat="@mipmap/ic_launcher_round"
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="17dp" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="User Nickname"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        tools:layout_editor_absoluteY="55dp" />
+</android.support.constraint.ConstraintLayout>

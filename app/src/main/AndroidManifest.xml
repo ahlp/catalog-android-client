@@ -18,6 +18,50 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CardSerieActivity"
+            android:label="@string/title_activity_card_serie"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MiniCardSerieActivity"
+            android:label="@string/title_activity_content_mini_card_serie"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserDetailsActivity"
+            android:label="@string/title_activity_user_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Profile"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Search"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EmptySearchActivity"
+            android:label="@string/title_activity_empty_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MostViewActivity"
+            android:label="@string/title_activity_most_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CardEpActivity"
+            android:label="@string/title_activity_card_ep"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CardUserActivity"
+            android:label="@string/title_activity_card_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchListActivity"
+            android:label="@string/title_activity_search_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
