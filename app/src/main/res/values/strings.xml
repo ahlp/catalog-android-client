@@ -15,4 +15,5 @@
     <string name="title_activity_card_ep">CardEpActivity</string>
     <string name="title_activity_card_user">CardUserActivity</string>
     <string name="title_activity_search_list">SearchListActivity</string>
+    <string name="imageDescription">Thumbnail</string>
 </resources>
