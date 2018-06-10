@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#2F2F2F">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textSeparator"
+        android:id="@+id/sectionTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text=""
-        android:textAllCaps="true"
+        android:gravity="left"
+        android:padding="24dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FFF"
+        android:textColor="#2F2F2F"
         android:textStyle="bold"
         android:visibility="visible" />
 

@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class HomeFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    private HomeCustomAdapter mAdapter;
+    private HomeCustomAdapter adapter;
 
     public HomeFragment() {};
 
@@ -21,21 +21,20 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mAdapter = new HomeCustomAdapter(this.getContext());
+        adapter = new HomeCustomAdapter(this.getContext());
 
-        int y = 1;
-        mAdapter.addSectionHeaderItem(new HomeObject(("Header Item #" + y), 0));
-        y = 2;
+        adapter.addSectionHeaderItem(new HomeObject("Histórico"));
+        adapter.addItem(new HomeObject("How to get away with murder", "Assisti o episódio 5 da 1a temporada", "https://source.unsplash.com/300x300/?movies"));
+        adapter.addItem(new HomeObject("Supernatural", "Assisti o episódio 9 da 3a temporada", "https://source.unsplash.com/300x300/?movies"));
+        adapter.addItem(new HomeObject("Cheese in the trap", "Assisti o episódio 3", "https://source.unsplash.com/400x300/?movies"));
 
-        for (int i = 1; i < 30; i++) {
-            mAdapter.addItem(new HomeObject(("Row Item #" + i), i*5));
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem(new HomeObject(("Header Item #" + y), 0));
-                y++;
-            }
-        }
+        adapter.addSectionHeaderItem(new HomeObject("O que você acompanha"));
+        adapter.addItem(new HomeObject("Dirk Gently", "3 temporada - 91 episódios", "https://source.unsplash.com/300x300/?movies"));
+        adapter.addItem(new HomeObject("I am Not a Robot", "16 episódios", "https://source.unsplash.com/300x300/?movies"));
+        adapter.addItem(new HomeObject("Agents of Shield", "4 tempoaradas - 106 episódios", "https://source.unsplash.com/300x300/?movies"));
+        adapter.addItem(new HomeObject("It's okay, That's Love", "20 episódios", "https://source.unsplash.com/300x300/?movies"));
 
-        setListAdapter(mAdapter);
+        setListAdapter(adapter);
         getListView().setOnItemClickListener(this);
     }
 

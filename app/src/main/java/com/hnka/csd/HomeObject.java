@@ -1,28 +1,57 @@
 package com.hnka.csd;
 
 public class HomeObject {
-    private String tName;
-    private double amount;
+    private String title;
+    private String subtitle;
+    private String image;
+    private int progress;
 
-    public HomeObject(String tName, double amount) {
-        this.tName = tName;
-        this.amount = amount;
+    public HomeObject(String title, String subtitle, String image, int progress) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image = image;
+        this.progress = progress;
     }
 
-    public String gettName() {
-        return tName;
+    public HomeObject(String title, String subtitle, String image) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image = image;
     }
 
-    public double getAmount() {
-        return amount;
+    public HomeObject(String title) {
+        this.title = title;
     }
 
-    public void settName(String tName) {
-        this.tName = tName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
 }
