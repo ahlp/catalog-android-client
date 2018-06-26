@@ -1,5 +1,7 @@
 package com.hnka.csd.client;
 
+import android.content.Context;
+
 public class ClientFactory {
 
     protected static String token;
@@ -7,6 +9,7 @@ public class ClientFactory {
 
     private static ClientLogin clientLogin;
     private static ClientProfile clientProfile;
+    private static ClientHome clientHome;
 
     public static ClientLogin getClientLoginInstance() {
         if (ClientFactory.clientLogin == null){
@@ -22,6 +25,14 @@ public class ClientFactory {
         }
 
         return ClientFactory.clientProfile;
+    }
+
+    public static ClientHome getClientHomeInstance(Context context) {
+        if (ClientFactory.clientHome == null){
+            ClientFactory.clientHome = new ClientHome(context);
+        }
+
+        return ClientFactory.clientHome;
     }
 
 }

@@ -16,4 +16,7 @@
     <string name="title_activity_card_user">CardUserActivity</string>
     <string name="title_activity_search_list">SearchListActivity</string>
     <string name="imageDescription">Thumbnail</string>
+    <string name="subtitle_watching">Watching</string>
+    <string name="subtitle_watched">Watched</string>
+    <string name="subtitle_watch_later">Watch Later</string>
 </resources>

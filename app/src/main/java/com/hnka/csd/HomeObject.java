@@ -1,5 +1,7 @@
 package com.hnka.csd;
 
+import com.google.gson.annotations.SerializedName;
+
 public class HomeObject {
     private String title;
     private String subtitle;

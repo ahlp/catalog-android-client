@@ -8,6 +8,25 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.hnka.csd.client.ClientFactory;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class HomeFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private HomeCustomAdapter adapter;
@@ -22,17 +41,54 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
         super.onActivityCreated(savedInstanceState);
 
         adapter = new HomeCustomAdapter(this.getContext());
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        String url = ClientFactory.HOST + "/api/historic";
 
-        adapter.addSectionHeaderItem(new HomeObject("Histórico"));
-        adapter.addItem(new HomeObject("How to get away with murder", "Assisti o episódio 5 da 1a temporada", "https://source.unsplash.com/300x300/?movies"));
-        adapter.addItem(new HomeObject("Supernatural", "Assisti o episódio 9 da 3a temporada", "https://source.unsplash.com/300x300/?movies"));
-        adapter.addItem(new HomeObject("Cheese in the trap", "Assisti o episódio 3", "https://source.unsplash.com/400x300/?movies"));
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JsonParser parser = new JsonParser();
+                        JsonObject rootObj = parser.parse(response).getAsJsonObject().getAsJsonObject("historic");
 
-        adapter.addSectionHeaderItem(new HomeObject("O que você acompanha"));
-        adapter.addItem(new HomeObject("Dirk Gently", "3 temporada - 91 episódios", "https://source.unsplash.com/300x300/?movies"));
-        adapter.addItem(new HomeObject("I am Not a Robot", "16 episódios", "https://source.unsplash.com/300x300/?movies"));
-        adapter.addItem(new HomeObject("Agents of Shield", "4 tempoaradas - 106 episódios", "https://source.unsplash.com/300x300/?movies"));
-        adapter.addItem(new HomeObject("It's okay, That's Love", "20 episódios", "https://source.unsplash.com/300x300/?movies"));
+                        JsonArray recent = rootObj.getAsJsonArray("recent");
+                        JsonArray watching = rootObj.getAsJsonArray("watching");
+
+                        adapter.addSectionHeaderItem(new HomeObject("Histórico"));
+
+                        for(int i=0; i < recent.size(); i++) {
+                            JsonElement viewer = recent.get(i);
+                            String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
+                            String subtitle = viewer.getAsJsonObject().get("status").getAsString();
+                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                        }
+
+                        adapter.addSectionHeaderItem(new HomeObject("O que você acompanha"));
+
+                        for(int j=0; j < watching.size(); j++) {
+                            JsonElement viewer = watching.get(j);
+                            String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
+                            String subtitle = viewer.getAsJsonObject().get("status").getAsString();
+                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("ID", "1");
+
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
 
         setListAdapter(adapter);
         getListView().setOnItemClickListener(this);
