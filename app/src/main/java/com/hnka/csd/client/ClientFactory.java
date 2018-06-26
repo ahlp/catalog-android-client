@@ -11,17 +11,17 @@ public class ClientFactory {
     private static ClientProfile clientProfile;
     private static ClientHome clientHome;
 
-    public static ClientLogin getClientLoginInstance() {
+    public static ClientLogin getClientLoginInstance(Context context) {
         if (ClientFactory.clientLogin == null){
-            ClientFactory.clientLogin = new ClientLogin();
+            ClientFactory.clientLogin = new ClientLogin(context);
         }
 
         return ClientFactory.clientLogin;
     }
 
-    public static ClientProfile getClientProfileInstance() {
+    public static ClientProfile getClientProfileInstance(Context context) {
         if (ClientFactory.clientProfile == null){
-            ClientFactory.clientProfile = new ClientProfile();
+            ClientFactory.clientProfile = new ClientProfile(context);
         }
 
         return ClientFactory.clientProfile;

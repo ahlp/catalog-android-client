@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.hnka.csd.client.ClientFactory;
 import com.hnka.csd.client.ClientLogin;
 
@@ -37,18 +39,23 @@ public class Login extends AppCompatActivity {
         String password = ((EditText)findViewById(R.id.Password)).getText().toString();
 
         // TODO: pass callback in parameters
-        ClientLogin client = ClientFactory.getClientLoginInstance();
-        client.login(userName, password);
-    }
-
-    private void showDialogError(String errorMessage) {
-        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
-    }
-
-    private void LoginSuccess() {
-        Intent intent = new Intent(this, HomeFragment.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
+        ClientLogin client = ClientFactory.getClientLoginInstance(getApplicationContext());
+        client.login(userName, password,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Invalid Login or Password",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     public void onRegister(View v) {
