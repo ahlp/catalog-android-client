@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hnka.csd">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -63,6 +63,10 @@
         <activity
             android:name=".SearchListActivity"
             android:label="@string/title_activity_search_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateSerieActivity"
+            android:label="@string/title_activity_create_serie"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

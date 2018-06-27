@@ -10,6 +10,7 @@ public class ClientFactory {
     private static ClientLogin clientLogin;
     private static ClientProfile clientProfile;
     private static ClientHome clientHome;
+    private static ClientSerie clientSerie;
 
     public static ClientLogin getClientLoginInstance(Context context) {
         if (ClientFactory.clientLogin == null){
@@ -35,4 +36,11 @@ public class ClientFactory {
         return ClientFactory.clientHome;
     }
 
+    public static ClientSerie getClientSerieInstance(Context context) {
+        if (ClientFactory.clientSerie == null){
+            ClientFactory.clientSerie = new ClientSerie(context);
+        }
+
+        return ClientFactory.clientSerie;
+    }
 }
