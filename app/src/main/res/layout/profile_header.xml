@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 <ImageView
-    android:id="@+id/lte3G"
+    android:id="@+id/user_avatar"
     android:layout_width="64dp"
     android:layout_height="64dp"
     android:layout_gravity="center"

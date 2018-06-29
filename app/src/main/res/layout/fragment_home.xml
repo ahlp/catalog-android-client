@@ -5,6 +5,7 @@
     tools:context="com.hnka.csd.HomeFragment">
 
     <ListView
+        android:layout_marginBottom="56dp"
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >

@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +23,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hnka.csd.client.ClientFactory;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +33,7 @@ import java.util.Map;
 public class ProfileFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
     private HomeCustomAdapter adapter;
+    private ViewGroup header;
 
     public ProfileFragment() {};
 
@@ -39,6 +45,8 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
         super.onActivityCreated(savedInstanceState);
 
         adapter = new HomeCustomAdapter(this.getContext());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        header = (ViewGroup)inflater.inflate(R.layout.profile_header, getListView(),false);
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         String url = ClientFactory.HOST + "/api/profiles";
 
@@ -70,6 +78,20 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
                             adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
                         }
 
+                        TextView name = (TextView) header.findViewById(R.id.user_name);
+                        name.setText("Cecília Hunka");
+
+                        TextView mail = (TextView) header.findViewById(R.id.user_mail);
+                        String about = rootObj.get("about").getAsString();
+                        mail.setText(about);
+
+                        TextView summary = (TextView) header.findViewById(R.id.user_summary);
+                        String birthday = rootObj.get("birthday").getAsString();
+                        summary.setText(birthday);
+
+                        ImageView avatar = (ImageView) header.findViewById(R.id.user_avatar);
+                        Picasso.get().load("https://source.unsplash.com/300x300/?movies").resize(120,120).into(avatar);
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -88,8 +110,6 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
 
         queue.add(stringRequest);
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.profile_header, getListView(),false);
         getListView().addHeaderView(header);
         getListView().setOnItemClickListener(this);
 
