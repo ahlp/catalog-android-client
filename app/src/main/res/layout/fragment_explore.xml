@@ -3,10 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.hnka.csd.ExploreFragment">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_explore"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textSeriesPopulares"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="8sp"
+            android:text="SeriesPopulares"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            tools:text="    Séries Populares" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recySeriesPopulares"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+    </LinearLayout>
 </FrameLayout>
