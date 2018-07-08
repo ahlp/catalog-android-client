@@ -1,6 +1,8 @@
 package com.hnka.csd;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -43,8 +45,10 @@ public class Profile extends AppCompatActivity {
         String userName = ((EditText)findViewById(R.id.ProfileUsername)).getText().toString();
         String birthday = ((EditText)findViewById(R.id.ProfileBirthday)).getText().toString();
         String bios = ((EditText)findViewById(R.id.ProfileBios)).getText().toString();
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
-        clientProfile.createProfile(userName, birthday, "", bios,
+        clientProfile.createProfile(userName, birthday, "", bios, token,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

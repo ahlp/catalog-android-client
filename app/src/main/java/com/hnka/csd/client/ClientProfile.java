@@ -2,6 +2,7 @@ package com.hnka.csd.client;
 
 import android.content.Context;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,9 +16,7 @@ public class ClientProfile {
 
     private RequestQueue queue;
 
-    protected ClientProfile(Context context) {
-        this.queue = Volley.newRequestQueue(context);
-    }
+    protected ClientProfile(Context context) { this.queue = Volley.newRequestQueue(context);  }
 
     public void getProfile(String id, Response.Listener<String> listener,
                            Response.ErrorListener errorListener) {
@@ -26,39 +25,76 @@ public class ClientProfile {
         this.queue.add(stringRequest);
     }
 
-    public void createProfile(String userName, String birthday, String avatarLink, String bios,
+    public void createProfile(final String userName, final String birthday,
+                              final String avatarLink, final String bios,
+                              final String token,
                               Response.Listener<String> listener,
                               Response.ErrorListener errorListener) {
         String url = ClientFactory.HOST + "/api/profiles/";
 
-        final String contextUsername = userName;
-        final String contextBirthday = birthday;
-        final String contextAvatar = avatarLink;
-        final String contextBios = bios;
-
         // POST
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener) {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<>();
-                params.put("userName", contextUsername);
-                params.put("birthday", contextBirthday);
-                params.put("avatarLink", contextAvatar);
-                params.put("bios", contextBios);
-
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("Content-Type","application/json");
+                params.put("token", token);
                 return params;
+            }
+            @Override
+            public byte[] getBody()
+            {
+
+                String body = "{\"profile\":{";
+
+                body.concat("\"userName\":\""+ userName + "\",");
+                body.concat("\"birthday\":\""+ birthday + "\",");
+                body.concat("\"avatarLink\":\""+ avatarLink + "\",");
+                body.concat("\"bios\":\""+ bios + "\"");
+
+                body.concat("}}");
+                return body.getBytes();
             }
         };
 
         this.queue.add(stringRequest);
     }
 
-    public void updateProfile(String userName, String birthday, String avatarLink, String bios,
+    public void updateProfile(String id, final String userName, final String birthday, final String avatarLink,
+                              final String bios, final String token,
                               Response.Listener<String> listener,
                               Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/api/profiles/";
-        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url, listener, errorListener);
+        String url = ClientFactory.HOST + "/api/profiles/" + id;
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url, listener,
+                errorListener){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("Content-Type","application/json");
+                params.put("token", token);
+                return params;
+            }
+            @Override
+            public byte[] getBody()
+            {
+                String body = "{\"profile\":{";
+
+                if (!userName.equals(""))
+                    body.concat("\"userName\":\""+ userName + "\",");
+                if (!birthday.equals(""))
+                    body.concat("\"birthday\":\""+ birthday + "\",");
+                if (!avatarLink.equals(""))
+                    body.concat("\"avatarLink\":\""+ avatarLink + "\",");
+                if (!bios.equals(""))
+                    body.concat("\"bios\":\""+ bios + "\"");
+
+                if (body.substring(body.length() - 1).equals(","))
+                    body = body.substring(0, body.length() - 2);
+
+                body.concat("}}");
+                return body.getBytes();
+            }
+        };
         this.queue.add(stringRequest);
     }
 }

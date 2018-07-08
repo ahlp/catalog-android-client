@@ -5,7 +5,7 @@ import android.content.Context;
 public class ClientFactory {
 
     protected static String token;
-    public static final String HOST = "localhost:30412";
+    public static final String HOST = "http://192.168.15.10";
 
     private static ClientLogin clientLogin;
     private static ClientProfile clientProfile;

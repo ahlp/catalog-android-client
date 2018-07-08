@@ -20,4 +20,5 @@
     <string name="subtitle_watched">Watched</string>
     <string name="subtitle_watch_later">Watch Later</string>
     <string name="title_activity_create_serie">CreateSerieActivity</string>
+    <string name="token_pref_key">Token</string>
 </resources>

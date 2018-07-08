@@ -10,23 +10,30 @@
 
     <EditText
         android:id="@+id/Password"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/Username"
-        tools:layout_editor_absoluteX="85dp" />
+        android:text="lala"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Username" />
 
     <EditText
         android:id="@+id/Username"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="85dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="96dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Login"
+        android:text="lala3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,19 +41,25 @@
         android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:onClick="onLogin"
         android:text="Login"
-        app:layout_constraintTop_toBottomOf="@+id/Password"
-        tools:layout_editor_absoluteX="148dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Password" />
 
     <Button
         android:id="@+id/RegisterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:onClick="onRegister"
         android:text="Register"
-        app:layout_constraintTop_toBottomOf="@+id/LoginButton"
-        tools:layout_editor_absoluteX="148dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
 </android.support.constraint.ConstraintLayout>
