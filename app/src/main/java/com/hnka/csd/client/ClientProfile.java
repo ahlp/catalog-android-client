@@ -20,7 +20,7 @@ public class ClientProfile {
 
     public void getProfile(String id, Response.Listener<String> listener,
                            Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/api/profiles/" + id;
+        String url = ClientFactory.HOST + "/csd/api/profiles/" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, listener, errorListener);
         this.queue.add(stringRequest);
     }
@@ -30,7 +30,7 @@ public class ClientProfile {
                               final String token,
                               Response.Listener<String> listener,
                               Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/api/profiles/";
+        String url = ClientFactory.HOST + "/csd/api/profiles/";
 
         // POST
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener) {
@@ -60,11 +60,11 @@ public class ClientProfile {
         this.queue.add(stringRequest);
     }
 
-    public void updateProfile(String id, final String userName, final String birthday, final String avatarLink,
+    public void updateProfile(String id, final String name, final String birthday, final String avatarLink,
                               final String bios, final String token,
                               Response.Listener<String> listener,
                               Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/api/profiles/" + id;
+        String url = ClientFactory.HOST + "/csd/api/profiles/" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url, listener,
                 errorListener){
             @Override
@@ -79,14 +79,14 @@ public class ClientProfile {
             {
                 String body = "{\"profile\":{";
 
-                if (!userName.equals(""))
-                    body.concat("\"userName\":\""+ userName + "\",");
+                if (!name.equals(""))
+                    body.concat("\"name\":\""+ name + "\",");
                 if (!birthday.equals(""))
                     body.concat("\"birthday\":\""+ birthday + "\",");
                 if (!avatarLink.equals(""))
                     body.concat("\"avatarLink\":\""+ avatarLink + "\",");
                 if (!bios.equals(""))
-                    body.concat("\"bios\":\""+ bios + "\"");
+                    body.concat("\"about\":\""+ bios + "\"");
 
                 if (body.substring(body.length() - 1).equals(","))
                     body = body.substring(0, body.length() - 2);

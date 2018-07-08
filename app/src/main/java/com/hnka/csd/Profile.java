@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -26,29 +24,22 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
-    public void CreateProfile() {
+    private void CreateProfile() {
         ClientProfile clientProfile = ClientFactory.getClientProfileInstance(getApplicationContext());
 
         boolean isCreatingProfile = true;
 
-        String userName = ((EditText)findViewById(R.id.ProfileUsername)).getText().toString();
+        String userName = ((EditText)findViewById(R.id.ProfileName)).getText().toString();
         String birthday = ((EditText)findViewById(R.id.ProfileBirthday)).getText().toString();
         String bios = ((EditText)findViewById(R.id.ProfileBios)).getText().toString();
+        String avatarLink = ((EditText)findViewById(R.id.ProfileName)).getText().toString();
+
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
-        clientProfile.createProfile(userName, birthday, "", bios, token,
+        clientProfile.createProfile(userName, birthday, avatarLink, bios, token,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -64,7 +55,7 @@ public class Profile extends AppCompatActivity {
                 });
     }
 
-    private void SendRegister(View v) {
+    public void SendRegister(View v) {
         final String userName = ((EditText)findViewById(R.id.ProfileUsername)).getText().toString();
         final String password = ((EditText)findViewById(R.id.ProfilePassword)).getText().toString();
         final ClientLogin clientLogin = ClientFactory.getClientLoginInstance(getApplicationContext());
