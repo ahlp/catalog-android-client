@@ -35,8 +35,10 @@ public class Login extends AppCompatActivity {
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
-        if(token != "") {
+
+        if(!token.equals("")) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
     }
@@ -53,7 +55,6 @@ public class Login extends AppCompatActivity {
 
                         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sharedPref.edit();
-                        Log.d("desespero", "The token is: " + response);
                         String token = response;
                         edit.putString(getString(R.string.token_pref_key), token);
                         edit.commit();
@@ -67,7 +68,6 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("desespero", "o erro foi: "+ error.getCause());
                         Toast.makeText(getApplicationContext(), "Invalid Login or Password",
                                 Toast.LENGTH_LONG).show();
                     }

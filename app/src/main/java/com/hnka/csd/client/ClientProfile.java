@@ -25,7 +25,7 @@ public class ClientProfile {
         this.queue.add(stringRequest);
     }
 
-    public void createProfile(final String userName, final String birthday,
+    public void createProfile(final String name, final String birthday,
                               final String avatarLink, final String bios,
                               final String token,
                               Response.Listener<String> listener,
@@ -47,12 +47,12 @@ public class ClientProfile {
 
                 String body = "{\"profile\":{";
 
-                body.concat("\"userName\":\""+ userName + "\",");
-                body.concat("\"birthday\":\""+ birthday + "\",");
-                body.concat("\"avatarLink\":\""+ avatarLink + "\",");
-                body.concat("\"bios\":\""+ bios + "\"");
+                body = body + "\"name\":\""+ name + "\",";
+                body = body + "\"birthday\":\""+ birthday + "\",";
+                body = body + "\"avatarLink\":\""+ avatarLink + "\",";
+                body = body + "\"about\":\""+ bios + "\"";
 
-                body.concat("}}");
+                body = body + "}}";
                 return body.getBytes();
             }
         };
