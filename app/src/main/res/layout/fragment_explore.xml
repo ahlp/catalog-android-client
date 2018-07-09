@@ -4,29 +4,36 @@
     android:layout_height="match_parent"
     tools:context="com.hnka.csd.ExploreFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textSeriesPopulares"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:lineSpacingExtra="8sp"
-            android:text="SeriesPopulares"
-            android:textAlignment="textStart"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="30sp"
-            android:textStyle="bold|italic"
-            tools:text="    Séries Populares" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recySeriesPopulares"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textSeriesPopulares"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="8sp"
+                android:text="SeriesPopulares"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="30sp"
+                android:textStyle="bold|italic"
+                tools:text="    Séries Populares" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recySeriesPopulares"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/activity_card_serie" />
+        </LinearLayout>
+    </ScrollView>
+
 </FrameLayout>
