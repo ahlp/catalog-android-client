@@ -1,5 +1,7 @@
 package com.hnka.csd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -48,7 +50,10 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
         LayoutInflater inflater = getActivity().getLayoutInflater();
         header = (ViewGroup)inflater.inflate(R.layout.profile_header, getListView(),false);
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        String url = ClientFactory.HOST + "/api/profiles";
+        String url = ClientFactory.HOST + "csd/api/profiles";
+
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        final String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -103,6 +108,7 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("ID", "1");
+                params.put("token", token);
 
                 return params;
             }

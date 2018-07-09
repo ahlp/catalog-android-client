@@ -15,7 +15,6 @@ public class ClientSerie {
     private RequestQueue queue;
 
     protected ClientSerie(Context context) {
-
         this.queue = Volley.newRequestQueue(context);
         this.queue.start();
     }

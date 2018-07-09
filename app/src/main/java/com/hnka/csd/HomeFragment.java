@@ -1,5 +1,7 @@
 package com.hnka.csd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -39,11 +41,12 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        final String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
         adapter = new HomeCustomAdapter(this.getContext());
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        String url = ClientFactory.HOST + "/api/historic";
-
+        String url = ClientFactory.HOST + "csd/api/historic";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -82,7 +85,8 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("ID", "1");
+//                params.put("ID", "1");
+                params.put("token", token);
 
                 return params;
             }
