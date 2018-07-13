@@ -17,6 +17,45 @@
         tools:showIn="@layout/activity_create_serie">
 
 
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="96dp"
+            android:text="Episodios"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.063"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CreateSerieLaunchDate" />
+
+        <EditText
+            android:id="@+id/CreateSeriePoster"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6TRgKs1CuUGKx7gAPcrTskBzlRKduOaE0sC8UWK6SwmuiV-8G"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Serie Image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.041"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="58dp" />
+
         <EditText
             android:id="@+id/CreateSerieLaunchDate"
             android:layout_width="341dp"
@@ -33,7 +72,22 @@
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
         <EditText
-            android:id="@+id/CreateSerieSeasons"
+            android:id="@+id/CreateSerieEpisodes"
+            android:layout_width="341dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+        <EditText
+            android:id="@+id/createSerieSeasons"
             android:layout_width="341dp"
             android:layout_height="46dp"
             android:layout_marginEnd="8dp"
@@ -58,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.069"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CreateSerieResume" />
+            app:layout_constraintTop_toBottomOf="@+id/CreateSerieAbout" />
 
         <TextView
             android:id="@+id/textView29"
@@ -74,7 +128,7 @@
             app:layout_constraintTop_toBottomOf="@+id/CreateSerieLaunchDate" />
 
         <EditText
-            android:id="@+id/CreateSerieResume"
+            android:id="@+id/CreateSerieAbout"
             android:layout_width="341dp"
             android:layout_height="88dp"
             android:layout_marginEnd="8dp"
@@ -100,31 +154,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/CreateSerieTitle" />
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="354dp"
-            android:layout_height="108dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_account_circle_black_24dp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:onClick="UploadImage"
-            android:text="UploadImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.967"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
         <EditText
             android:id="@+id/CreateSerieTitle"
             android:layout_width="342dp"
@@ -134,7 +163,7 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:text="Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
@@ -145,12 +174,12 @@
             android:layout_height="14dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="Title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.063"
+            app:layout_constraintHorizontal_bias="0.041"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/CreateSeriePoster" />
 
         <Button
             android:id="@+id/button2"
@@ -165,8 +194,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CreateSerieSeasons"
+            app:layout_constraintTop_toBottomOf="@+id/CreateSerieEpisodes"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Serie"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="16dp" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
