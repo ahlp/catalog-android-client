@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Welcome to CSD!", Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }
