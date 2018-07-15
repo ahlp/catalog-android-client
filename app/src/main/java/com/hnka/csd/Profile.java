@@ -48,7 +48,7 @@ public class Profile extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                                SharedPreferences sharedPref = getSharedPreferences("csd", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 try {
                                     JSONObject responseJson = new JSONObject(response);

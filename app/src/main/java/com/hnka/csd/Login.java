@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("csd", Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
         if(!token.equals("")) {
@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences sharedPref = getSharedPreferences("csd", Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sharedPref.edit();
                         try {
                             JSONObject responseJson = new JSONObject(response);
