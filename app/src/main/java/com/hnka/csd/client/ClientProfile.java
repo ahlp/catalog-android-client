@@ -20,43 +20,8 @@ public class ClientProfile {
 
     public void getProfile(String id, Response.Listener<String> listener,
                            Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/csd/api/profiles/" + id;
+        String url = ClientFactory.HOST + "/api/profiles/" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, listener, errorListener);
-        this.queue.add(stringRequest);
-    }
-
-    public void createProfile(final String name, final String birthday,
-                              final String avatarLink, final String bios,
-                              final String token,
-                              Response.Listener<String> listener,
-                              Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/csd/api/profiles/";
-
-        // POST
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("Content-Type","application/json");
-                params.put("token", token);
-                return params;
-            }
-            @Override
-            public byte[] getBody()
-            {
-
-                String body = "{\"profile\":{";
-
-                body = body + "\"name\":\""+ name + "\",";
-                body = body + "\"birthday\":\""+ birthday + "\",";
-                body = body + "\"avatarLink\":\""+ avatarLink + "\",";
-                body = body + "\"about\":\""+ bios + "\"";
-
-                body = body + "}}";
-                return body.getBytes();
-            }
-        };
-
         this.queue.add(stringRequest);
     }
 
@@ -64,7 +29,7 @@ public class ClientProfile {
                               final String bios, final String token,
                               Response.Listener<String> listener,
                               Response.ErrorListener errorListener) {
-        String url = ClientFactory.HOST + "/csd/api/profiles/" + id;
+        String url = ClientFactory.HOST + "/api/profiles/" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.PUT, url, listener,
                 errorListener){
             @Override

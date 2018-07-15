@@ -24,10 +24,11 @@ public class ClientLogin {
         this.queue.start();
     }
 
-    public void login(final String userName, final String password, Response.Listener<String> listener,
+    public void login(final String email, final String password,
+                      Response.Listener<String> listener,
                       Response.ErrorListener errorListener) {
 
-        String url = ClientFactory.HOST + "/login";
+        String url = ClientFactory.HOST + "/public/authenticate";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 listener,
                 errorListener) {
@@ -39,7 +40,7 @@ public class ClientLogin {
             }
             @Override
             public byte[] getBody(){
-                String body = "{\"login\":\"" + userName + "\", \"password\": \""+ password +"\"}";
+                String body = "{\"email\":\"" + email + "\", \"password\": \""+ password +"\"}";
 
                 return body.getBytes();
             }
@@ -47,10 +48,13 @@ public class ClientLogin {
         this.queue.add(stringRequest);
     }
 
-    public void register(final String userName, final String password, Response.Listener<String> listener,
+    public void register(final String email, final String password,
+                         final String name, final String birthday,
+                         final String avatarLink, final String about,
+                         Response.Listener<String> listener,
                          Response.ErrorListener errorListener) {
 
-        String url = ClientFactory.HOST + "/register";
+        String url = ClientFactory.HOST + "/public/registrations";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener,
                 errorListener) {
             @Override
@@ -61,8 +65,16 @@ public class ClientLogin {
             }
             @Override
             public byte[] getBody(){
-                String body = "{\"login\":\"" + userName + "\", \"password\": \""+ password +"\"}";
+                String body = "{\"profile\":{";
 
+                body = body + "\"email\":\""+ email + "\",";
+                body = body + "\"password\":\""+ password + "\",";
+                body = body + "\"name\":\""+ name + "\",";
+                body = body + "\"birthday\":\""+ birthday + "\",";
+                body = body + "\"avatar_link\":\""+ avatarLink + "\",";
+                body = body + "\"about\":\""+ about + "\"";
+
+                body = body + "}}";
                 return body.getBytes();
             }
         };

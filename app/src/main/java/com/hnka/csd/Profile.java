@@ -17,6 +17,9 @@ import com.hnka.csd.client.ClientFactory;
 import com.hnka.csd.client.ClientLogin;
 import com.hnka.csd.client.ClientProfile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Profile extends AppCompatActivity {
 
     @Override
@@ -27,74 +30,59 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private void CreateProfile() {
-        ClientProfile clientProfile = ClientFactory.getClientProfileInstance(getApplicationContext());
-
-        boolean isCreatingProfile = true;
-
-        String name = ((EditText)findViewById(R.id.ProfileName)).getText().toString();
-        String birthday = ((EditText)findViewById(R.id.ProfileBirthday)).getText().toString();
-        String bios = ((EditText)findViewById(R.id.ProfileBios)).getText().toString();
-        String avatarLink = ((EditText)findViewById(R.id.profileAvatarLink)).getText().toString();
-
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_pref_key), "");
-
-        clientProfile.createProfile(name, birthday, avatarLink, bios, token,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        ProfileCreateWithSuccess();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Invalid Login or Password",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
-
     public void SendRegister(View v) {
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        String token = sharedPref.getString(getString(R.string.token_pref_key), "");
-        if (!token.equals("")) {
-            CreateProfile();
-            return;
-        }
-
-        final String userName = ((EditText)findViewById(R.id.ProfileUsername)).getText().toString();
+        final String email = ((EditText)findViewById(R.id.ProfileUsername)).getText().toString();
         final String password = ((EditText)findViewById(R.id.ProfilePassword)).getText().toString();
         final ClientLogin clientLogin = ClientFactory.getClientLoginInstance(getApplicationContext());
+        final String name = ((EditText)findViewById(R.id.ProfileName)).getText().toString();
+        final String birthday = ((EditText)findViewById(R.id.ProfileBirthday)).getText().toString();
+        final String about = ((EditText)findViewById(R.id.ProfileBios)).getText().toString();
+        final String avatarLink = ((EditText)findViewById(R.id.profileAvatarLink)).getText().toString();
 
-        final Response.ErrorListener errorLoginCallback = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Invalid Login or Password",
-                        Toast.LENGTH_LONG).show();
-            }
-        };
-
-        clientLogin.register(userName, password,
+        clientLogin.register(email, password, name, birthday, avatarLink, about,
                 new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                clientLogin.login(userName, password,
+                clientLogin.login(email, password,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString(getString(R.string.token_pref_key), response);
-                                editor.commit();
-                                CreateProfile();
+                                try {
+                                    JSONObject responseJson = new JSONObject(response);
+
+                                    String token = responseJson.getString("token");
+
+                                    editor.putString(getString(R.string.token_pref_key), token);
+                                    editor.commit();
+                                } catch (JSONException e) {
+                                    Log.e("Error", "Cannot save token");
+                                    Log.e("Error", e.getMessage());
+                                    Toast.makeText(getApplicationContext(),
+                                            "Cannot login, wrong version", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                ProfileCreateWithSuccess();
                             }
                         },
-                        errorLoginCallback);
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Register created but cannot login",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
-        }, errorLoginCallback);
+        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Cannot create register",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void ProfileCreateWithSuccess() {

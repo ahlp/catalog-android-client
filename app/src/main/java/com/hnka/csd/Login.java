@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.hnka.csd.client.ClientFactory;
 import com.hnka.csd.client.ClientLogin;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
@@ -55,13 +56,23 @@ public class Login extends AppCompatActivity {
 
                         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sharedPref.edit();
-                        String token = response;
-                        edit.putString(getString(R.string.token_pref_key), token);
-                        edit.commit();
+                        try {
+                            JSONObject responseJson = new JSONObject(response);
 
+                            String token = responseJson.getString("token");
+
+                            edit.putString(getString(R.string.token_pref_key), token);
+                            edit.commit();
+                        } catch (JSONException e) {
+                            Log.e("Error", "Cannot save token");
+                            Log.e("Error", e.getMessage());
+                            Toast.makeText(getApplicationContext(),
+                                    "Cannot login, wrong version", Toast.LENGTH_LONG).show();
+                            return;
+                        }
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                         startActivity(intent);
                     }
                 },
