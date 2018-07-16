@@ -282,7 +282,7 @@ public class SerieDetail extends AppCompatActivity {
                         int width = size.x;
 
                         float density = getApplicationContext().getResources().getDisplayMetrics().density;
-                        float pxValue = 180 * density;
+                        float pxValue = 240 * density;
 
                         Picasso.get().load(posterUrl).resize(width,Math.round(pxValue)).centerCrop().into(poster);
 
