@@ -1,5 +1,6 @@
 package com.hnka.csd;
 
+
 public class HomeObject {
     private String title;
     private String subtitle;

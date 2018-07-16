@@ -1,13 +1,17 @@
 package com.hnka.csd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,11 +49,14 @@ public class SerieDetail extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+        Intent myIntent = getIntent();
+        String idValue = myIntent.getStringExtra("id");
+
         SharedPreferences sharedPref = this.getApplicationContext().getSharedPreferences("csd", Context.MODE_PRIVATE);
         final String token = sharedPref.getString("Token", "");
 
         RequestQueue queue = Volley.newRequestQueue(this.getApplicationContext());
-        String url = ClientFactory.HOST + "/api/series/" + "1";
+        String url = ClientFactory.HOST + "/api/series/" + idValue;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -63,6 +70,11 @@ public class SerieDetail extends AppCompatActivity {
                         String about = rootObj.get("about").getAsString();
                         String seasonsCount  = rootObj.get("seasons_count").getAsString();
                         String episodesCount  = rootObj.get("episodes_count").getAsString();
+                        String viewerStatus = "";
+
+                        if (rootObj.has("viewer_status")) {
+                            viewerStatus = rootObj.get("viewer_status").getAsString();
+                        }
 
                         String serieDetail = seasonsCount + " temporada(s), " + episodesCount + " episódios";
 
@@ -71,6 +83,31 @@ public class SerieDetail extends AppCompatActivity {
                         TextView launchView = (TextView) findViewById(R.id.serieLaunchDate);
                         TextView detailView = (TextView) findViewById(R.id.serieSeasons);
                         TextView aboutView = (TextView) findViewById(R.id.serieAbout);
+
+
+                        Button watchLaterButton = (Button) findViewById(R.id.watchLaterButton);
+                        watchLaterButton.setBackgroundResource(R.drawable.button_not_selected);
+
+                        Button watchedButton = (Button) findViewById(R.id.watchedButton);
+                        watchedButton.setBackgroundResource(R.drawable.button_not_selected);
+
+                        Button watchingButton = (Button) findViewById(R.id.watchingButton);
+                        watchingButton.setBackgroundResource(R.drawable.button_not_selected);
+
+                        if (viewerStatus.equals("watch_later")) {
+                            watchLaterButton.setBackgroundResource(R.drawable.button_selected);
+                            watchLaterButton.setTextColor(Color.WHITE);
+                        }
+
+                        if (viewerStatus.equals("watched")) {
+                            watchedButton.setBackgroundResource(R.drawable.button_selected);
+                            watchedButton.setTextColor(Color.WHITE);
+                        }
+
+                        if (viewerStatus.equals("watching")) {
+                            watchingButton.setBackgroundResource(R.drawable.button_selected);
+                            watchingButton.setTextColor(Color.WHITE);
+                        }
 
                         titleView.setText(title);
                         launchView.setText("Data de Lançamento: " + launch);

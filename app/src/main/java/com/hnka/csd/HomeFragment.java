@@ -109,7 +109,7 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
             HomeObject object = adapter.getItem(position);
 
             Intent intent = new Intent(this.getContext(), SerieDetail.class);
-            intent.putExtra("id", object.getId());
+            intent.putExtra("id", String.valueOf(object.getId()));
             startActivity(intent);
         }
     }
