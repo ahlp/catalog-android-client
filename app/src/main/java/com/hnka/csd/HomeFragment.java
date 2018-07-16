@@ -1,6 +1,7 @@
 package com.hnka.csd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -100,5 +101,8 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
 
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this.getContext(), SerieDetail.class);
+        startActivity(intent);
     }
 }
