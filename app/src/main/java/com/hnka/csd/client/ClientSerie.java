@@ -73,14 +73,14 @@ public class ClientSerie {
             public byte[] getBody()
             {
 
-                String body = "{\"profile\":{";
+                String body = "{\"serie\":{";
 
                 body = body + "\"title\":\""+ title + "\",";
                 body = body + "\"launch_date\":\""+ launch_date + "\",";
                 body = body + "\"poster_link\":\""+ posterLink + "\",";
                 body = body + "\"about\":\""+ about + "\",";
-                body = body + "\"number_of_seasons\":\"" + number_of_seasons + "\",";
-                body = body + "\"episodes_per_season\":\"" + episodes_per_season + "\"";
+                body = body + "\"number_of_seasons\":" + number_of_seasons + ",";
+                body = body + "\"episodes_per_season\":" + episodes_per_season + "";
 
                 body = body + "}}";
                 return body.getBytes();
