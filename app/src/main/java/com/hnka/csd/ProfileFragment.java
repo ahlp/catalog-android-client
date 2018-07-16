@@ -130,7 +130,6 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
         int correctPosition = position - 1;
 
         if (correctPosition >= 0) {

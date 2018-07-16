@@ -10,8 +10,7 @@
     android:layout_width="64dp"
     android:layout_height="64dp"
     android:layout_gravity="center"
-    android:gravity="center"
-    android:src="@drawable/ic_dashboard_black_24dp" />
+    android:gravity="center" />
 
 <TextView
     android:id="@+id/user_name"
@@ -20,7 +19,7 @@
     android:layout_marginStart="2dp"
     android:layout_marginTop="2dp"
     android:gravity="center"
-    android:text="Arthur Pires" />
+    android:text="" />
 
 <TextView
     android:id="@+id/user_mail"
@@ -29,7 +28,7 @@
     android:layout_marginStart="2dp"
     android:layout_marginTop="2dp"
     android:gravity="center"
-    android:text="arthurpires@gmail.com" />
+    android:text="" />
 
 <TextView
     android:id="@+id/user_summary"
@@ -38,6 +37,6 @@
     android:layout_marginStart="2dp"
     android:layout_marginTop="2dp"
     android:gravity="center"
-    android:text="10 séries - 5 avaliações" />
+    android:text="" />
 
 </LinearLayout>

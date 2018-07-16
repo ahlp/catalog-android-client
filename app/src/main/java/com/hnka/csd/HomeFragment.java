@@ -104,8 +104,6 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
-
         int type = adapter.getItemViewType(position);
         if (type == 0) {
             HomeObject object = adapter.getItem(position);
