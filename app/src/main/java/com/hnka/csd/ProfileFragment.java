@@ -1,6 +1,7 @@
 package com.hnka.csd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -71,7 +72,9 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
                             JsonElement viewer = later.get(i);
                             String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
                             String subtitle = viewer.getAsJsonObject().get("status").getAsString();
-                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                            int id = viewer.getAsJsonObject().getAsJsonObject("serie").get("id").getAsInt();
+                            String poster = viewer.getAsJsonObject().getAsJsonObject("serie").get("poster_link").getAsString();
+                            adapter.addItem(new HomeObject(id, title, subtitle, poster));
                         }
 
                         adapter.addSectionHeaderItem(new HomeObject("Finalizadas"));
@@ -80,11 +83,14 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
                             JsonElement viewer = finished.get(j);
                             String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
                             String subtitle = viewer.getAsJsonObject().get("status").getAsString();
-                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                            int id = viewer.getAsJsonObject().getAsJsonObject("serie").get("id").getAsInt();
+                            String poster = viewer.getAsJsonObject().getAsJsonObject("serie").get("poster_link").getAsString();
+                            adapter.addItem(new HomeObject(id, title, subtitle, poster));
                         }
 
                         TextView name = (TextView) header.findViewById(R.id.user_name);
-                        name.setText("Cecília Hunka");
+                        String objectName = rootObj.get("name").getAsString();
+                        name.setText(objectName);
 
                         TextView mail = (TextView) header.findViewById(R.id.user_mail);
                         String about = rootObj.get("about").getAsString();
@@ -95,7 +101,8 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
                         summary.setText(birthday);
 
                         ImageView avatar = (ImageView) header.findViewById(R.id.user_avatar);
-                        Picasso.get().load("https://source.unsplash.com/300x300/?movies").resize(120,120).into(avatar);
+                        String link = rootObj.get("avatar_link").getAsString();
+                        Picasso.get().load(link).resize(120,120).into(avatar);
 
                     }
                 }, new Response.ErrorListener() {
@@ -124,5 +131,18 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
 
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+        int correctPosition = position - 1;
+
+        if (correctPosition >= 0) {
+            int type = adapter.getItemViewType(correctPosition);
+
+            if (type == 0) {
+                HomeObject object = adapter.getItem(correctPosition);
+                Intent intent = new Intent(this.getContext(), SerieDetail.class);
+                intent.putExtra("id", object.getId());
+                startActivity(intent);
+            }
+        }
+
     }
 }

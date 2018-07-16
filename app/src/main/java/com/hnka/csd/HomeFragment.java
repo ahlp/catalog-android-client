@@ -65,7 +65,9 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
                             JsonElement viewer = recent.get(i);
                             String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
                             String subtitle = viewer.getAsJsonObject().get("status").getAsString();
-                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                            int id = viewer.getAsJsonObject().getAsJsonObject("serie").get("id").getAsInt();
+                            String poster = viewer.getAsJsonObject().getAsJsonObject("serie").get("poster_link").getAsString();
+                            adapter.addItem(new HomeObject(id, title, subtitle, poster));
                         }
 
                         adapter.addSectionHeaderItem(new HomeObject("O que você acompanha"));
@@ -74,7 +76,9 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
                             JsonElement viewer = watching.get(j);
                             String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
                             String subtitle = viewer.getAsJsonObject().get("status").getAsString();
-                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                            int id = viewer.getAsJsonObject().getAsJsonObject("serie").get("id").getAsInt();
+                            String poster = viewer.getAsJsonObject().getAsJsonObject("serie").get("poster_link").getAsString();
+                            adapter.addItem(new HomeObject(id, title, subtitle, poster));
                         }
 
                     }
@@ -102,7 +106,13 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this.getContext(), SerieDetail.class);
-        startActivity(intent);
+        int type = adapter.getItemViewType(position);
+        if (type == 0) {
+            HomeObject object = adapter.getItem(position);
+
+            Intent intent = new Intent(this.getContext(), SerieDetail.class);
+            intent.putExtra("id", object.getId());
+            startActivity(intent);
+        }
     }
 }
