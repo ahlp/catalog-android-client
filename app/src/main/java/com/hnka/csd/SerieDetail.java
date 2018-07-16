@@ -61,6 +61,10 @@ public class SerieDetail extends AppCompatActivity {
                         String title = rootObj.get("title").getAsString();
                         String launch = rootObj.get("launch_date").getAsString();
                         String about = rootObj.get("about").getAsString();
+                        String seasonsCount  = rootObj.get("seasons_count").getAsString();
+                        String episodesCount  = rootObj.get("episodes_count").getAsString();
+
+                        String serieDetail = seasonsCount + " temporada(s), " + episodesCount + " episódios";
 
                         ImageView poster = (ImageView) findViewById(R.id.posterView);
                         TextView titleView = (TextView) findViewById(R.id.serieTitle);
@@ -69,8 +73,9 @@ public class SerieDetail extends AppCompatActivity {
                         TextView aboutView = (TextView) findViewById(R.id.serieAbout);
 
                         titleView.setText(title);
-                        launchView.setText(launch);
+                        launchView.setText("Data de Lançamento: " + launch);
                         aboutView.setText(about);
+                        detailView.setText(serieDetail);
 
                         Display display = getWindowManager().getDefaultDisplay();
                         Point size = new Point();
@@ -81,8 +86,6 @@ public class SerieDetail extends AppCompatActivity {
                         float pxValue = 180 * density;
 
                         Picasso.get().load(posterUrl).resize(width,Math.round(pxValue)).centerCrop().into(poster);
-
-
 
                     }
                 }, new Response.ErrorListener() {
