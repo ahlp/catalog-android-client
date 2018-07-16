@@ -1,8 +1,10 @@
 package com.hnka.csd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,12 +43,12 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        final String token = sharedPref.getString(getString(R.string.token_pref_key), "");
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("csd", Context.MODE_PRIVATE);
+        final String token = sharedPref.getString("Token", "");
 
         adapter = new HomeCustomAdapter(this.getContext());
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        String url = ClientFactory.HOST + "csd/api/historic";
+        String url = ClientFactory.HOST + "/api/historic";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -63,7 +65,9 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
                             JsonElement viewer = recent.get(i);
                             String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
                             String subtitle = viewer.getAsJsonObject().get("status").getAsString();
-                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                            int id = viewer.getAsJsonObject().getAsJsonObject("serie").get("id").getAsInt();
+                            String poster = viewer.getAsJsonObject().getAsJsonObject("serie").get("poster_link").getAsString();
+                            adapter.addItem(new HomeObject(id, title, subtitle, poster));
                         }
 
                         adapter.addSectionHeaderItem(new HomeObject("O que você acompanha"));
@@ -72,7 +76,9 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
                             JsonElement viewer = watching.get(j);
                             String title = viewer.getAsJsonObject().getAsJsonObject("serie").get("title").getAsString();
                             String subtitle = viewer.getAsJsonObject().get("status").getAsString();
-                            adapter.addItem(new HomeObject(title, subtitle, "https://source.unsplash.com/300x300/?movies"));
+                            int id = viewer.getAsJsonObject().getAsJsonObject("serie").get("id").getAsInt();
+                            String poster = viewer.getAsJsonObject().getAsJsonObject("serie").get("poster_link").getAsString();
+                            adapter.addItem(new HomeObject(id, title, subtitle, poster));
                         }
 
                     }
@@ -85,7 +91,6 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-//                params.put("ID", "1");
                 params.put("token", token);
 
                 return params;
@@ -100,5 +105,14 @@ public class HomeFragment extends ListFragment implements AdapterView.OnItemClic
 
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+
+        int type = adapter.getItemViewType(position);
+        if (type == 0) {
+            HomeObject object = adapter.getItem(position);
+
+            Intent intent = new Intent(this.getContext(), SerieDetail.class);
+            intent.putExtra("id", object.getId());
+            startActivity(intent);
+        }
     }
 }

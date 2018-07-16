@@ -39,6 +39,7 @@
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Search"
@@ -67,6 +68,11 @@
         <activity
             android:name=".CreateSerieActivity"
             android:label="@string/title_activity_create_serie"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".SerieDetail"
+            android:label="Detalhes da Série"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

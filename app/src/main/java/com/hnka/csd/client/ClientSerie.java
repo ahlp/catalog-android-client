@@ -2,7 +2,6 @@ package com.hnka.csd.client;
 
 import android.content.Context;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -52,12 +51,12 @@ public class ClientSerie {
 //                    "episodes_per_season": 12
 //             }
 //        }
-        String url = ClientFactory.HOST + "/csd/api/series/";
+        String url = ClientFactory.HOST + "/api/series/";
 
         // POST
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, errorListener) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String,String> params = new HashMap<>();
                 params.put("Content-Type","application/json");
                 params.put("token", token);
@@ -71,7 +70,7 @@ public class ClientSerie {
 
                 body = body + "\"title\":\""+ title + "\",";
                 body = body + "\"launch_date\":\""+ launch_date + "\",";
-                body = body + "\"posterLink\":\""+ posterLink + "\",";
+                body = body + "\"poster_link\":\""+ posterLink + "\",";
                 body = body + "\"about\":\""+ about + "\",";
                 body = body + "\"number_of_seasons\":\"" + number_of_seasons + "\",";
                 body = body + "\"episodes_per_season\":\"" + episodes_per_season + "\"";

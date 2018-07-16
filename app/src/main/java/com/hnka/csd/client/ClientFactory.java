@@ -5,7 +5,7 @@ import android.content.Context;
 public class ClientFactory {
 
     protected static String token;
-    public static final String HOST = "http://192.168.15.10";
+    public static final String HOST = "https://csd-dev.herokuapp.com";
 
     private static ClientLogin clientLogin;
     private static ClientProfile clientProfile;

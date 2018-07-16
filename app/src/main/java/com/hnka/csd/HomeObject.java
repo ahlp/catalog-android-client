@@ -1,18 +1,16 @@
 package com.hnka.csd;
 
-import com.google.gson.annotations.SerializedName;
-
 public class HomeObject {
     private String title;
     private String subtitle;
     private String image;
-    private int progress;
+    private int id;
 
-    public HomeObject(String title, String subtitle, String image, int progress) {
+    public HomeObject(int id, String title, String subtitle, String image) {
         this.title = title;
         this.subtitle = subtitle;
         this.image = image;
-        this.progress = progress;
+        this.id = id;
     }
 
     public HomeObject(String title, String subtitle, String image) {
@@ -49,11 +47,7 @@ public class HomeObject {
         this.image = image;
     }
 
-    public int getProgress() {
-        return progress;
-    }
+    public int getId() { return this.id; }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
+    public void setId(int id) { this.id = id; }
 }
