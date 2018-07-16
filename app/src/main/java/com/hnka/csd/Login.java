@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("csd", Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
+        //if(true) {
         if(!token.equals("")) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
