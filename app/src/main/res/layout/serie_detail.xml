@@ -99,12 +99,23 @@
                 android:layout_margin="5dp"
                 android:text="" />
 
+            <Button
+                android:id="@+id/ShareButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:onClick="onShareAction"
+                android:text="Compartilhar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="428dp" />
+
 
         </LinearLayout>
 
 
     </ScrollView>
-
 
 
 </android.support.constraint.ConstraintLayout>

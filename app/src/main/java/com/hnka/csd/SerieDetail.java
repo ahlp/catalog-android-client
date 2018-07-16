@@ -125,6 +125,7 @@ public class SerieDetail extends AppCompatActivity {
                                         watchedButton.setEnabled(true);
                                         watchedButton.setTextColor(Color.BLACK);
                                         watchedButton.setBackgroundResource(R.drawable.button_not_selected);
+
                                     }
                                 }, new Response.ErrorListener() {
                                     @Override
@@ -304,4 +305,18 @@ public class SerieDetail extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    public void onShareAction(View v) {
+
+        String title = ((TextView) findViewById(R.id.serieTitle)).getText().toString();
+        String about = ((TextView) findViewById(R.id.serieAbout)).getText().toString();
+
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        String shareBody = "Olá, vi esta Serie / Drama e lembrei de você.\nO nome dela é " + title;
+        shareBody = shareBody + "\n e ela é sobre: " + about;
+
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent, "CSD infos"));
+    }
 }
