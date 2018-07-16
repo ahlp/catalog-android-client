@@ -19,7 +19,7 @@ public class ClientSerie {
         this.queue.start();
     }
 
-    private void requestSeries(Map<String, String> params, int method, String id,
+    private void requestSeries(Map<String, String> params, int method, String id, final String token,
                              Response.Listener<String> listener,
                              Response.ErrorListener errorListener) {
         String url = ClientFactory.HOST + "/api/series/" + id;
@@ -30,6 +30,13 @@ public class ClientSerie {
             protected Map<String, String> getParams()
             {
                 return requestParams;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String,String> params = new HashMap<>();
+                params.put("token", token);
+                return params;
             }
         };
         this.queue.add(stringRequest);
@@ -87,20 +94,21 @@ public class ClientSerie {
                             Response.Listener<String> listener,
                             Response.ErrorListener errorListener)
     {
-        this.requestSeries(params, Request.Method.PUT, id, listener, errorListener);
+//        this.requestSeries(params, Request.Method.PUT, id, listener, errorListener);
     }
 
-    public void getSeries(Response.Listener<String> listener,
-                            Response.ErrorListener errorListener)
+    public void getSeries(String token,
+                          Response.Listener<String> listener,
+                          Response.ErrorListener errorListener)
     {
-        this.requestSeries(new HashMap<String, String>(), Request.Method.GET, "",
+        this.requestSeries(new HashMap<String, String>(), Request.Method.GET, "", token,
                 listener, errorListener);
     }
 
-    public void getSerie(String id, Response.Listener<String> listener,
+    public void getSerie(String id, String token, Response.Listener<String> listener,
                           Response.ErrorListener errorListener)
     {
-        this.requestSeries(new HashMap<String, String>(), Request.Method.GET, id,
+        this.requestSeries(new HashMap<String, String>(), Request.Method.GET, id, token,
                 listener, errorListener);
     }
 }
