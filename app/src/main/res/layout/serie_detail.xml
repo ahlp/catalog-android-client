@@ -36,10 +36,9 @@
 
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/posterView"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+                android:layout_height="180dp" />
 
             <LinearLayout
                 android:id="@+id/view"
@@ -70,28 +69,28 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/serieTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="" />
 
             <TextView
-                android:id="@+id/textView36"
+                android:id="@+id/serieLaunchDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="" />
 
             <TextView
-                android:id="@+id/textView37"
+                android:id="@+id/serieSeasons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="" />
 
             <TextView
-                android:id="@+id/textView38"
+                android:id="@+id/serieAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="" />
 
 
         </LinearLayout>
