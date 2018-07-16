@@ -138,7 +138,7 @@ public class ProfileFragment extends ListFragment implements AdapterView.OnItemC
             if (type == 0) {
                 HomeObject object = adapter.getItem(correctPosition);
                 Intent intent = new Intent(this.getContext(), SerieDetail.class);
-                intent.putExtra("id", object.getId());
+                intent.putExtra("id",String.valueOf(object.getId()));
                 startActivity(intent);
             }
         }
