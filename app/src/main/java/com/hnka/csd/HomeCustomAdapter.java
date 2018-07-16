@@ -91,7 +91,7 @@ public class HomeCustomAdapter extends BaseAdapter {
             holder.titleText.setText(data.get(position).getTitle());
             holder.subtitleText.setText(data.get(position).getSubtitle());
 
-            Picasso.get().load(data.get(position).getImage()).resize(120,120).into(holder.imageThumb);
+            Picasso.get().load(data.get(position).getImage()).resize(120,120).centerCrop().into(holder.imageThumb);
 
         }else if(rowType == TYPE_HEADER){
             holder.titleText.setText(data.get(position).getTitle());
