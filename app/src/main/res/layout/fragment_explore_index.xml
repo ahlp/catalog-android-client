@@ -5,29 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.hnka.csd.ExploreFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="351dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Procure por séries, eps ou usuários"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include layout="@layout/fragment_explore_index" />
-
-    </LinearLayout>
-
-    <!--<ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -57,6 +35,6 @@
                 android:scrollbars="vertical"
                 tools:listitem="@layout/activity_card_serie" />
         </LinearLayout>
-    </ScrollView>-->
+    </ScrollView>
 
 </FrameLayout>
