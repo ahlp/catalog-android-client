@@ -26,15 +26,6 @@ public class CreateSerieActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
 
     public void CreateSerie(View v) {
@@ -47,7 +38,7 @@ public class CreateSerieActivity extends AppCompatActivity {
         String seasons = ((EditText)findViewById(R.id.createSerieSeasons)).getText().toString();
         String episodes = ((EditText)findViewById(R.id.CreateSerieEpisodes)).getText().toString();
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("csd", Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
         clientSerie.createSerie(title, launch, poster, about, seasons, episodes, token,
@@ -58,7 +49,7 @@ public class CreateSerieActivity extends AppCompatActivity {
                                 "The serie has been created.\nThanks for the support!",
                                 Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(getApplicationContext(), HomeFragment.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                     }

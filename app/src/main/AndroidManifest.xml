@@ -66,6 +66,7 @@
             android:label="@string/title_activity_search_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:noHistory="true"
             android:name=".CreateSerieActivity"
             android:label="@string/title_activity_create_serie"
             android:theme="@style/AppTheme.NoActionBar"></activity>
