@@ -28,12 +28,17 @@
                 android:textStyle="bold|italic"
                 tools:text="    Séries Populares" />
 
-            <android.support.v7.widget.RecyclerView
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listSeriesPopulares"
+                tools:listitem="@layout/activity_card_serie"></ListView>
+            <!--<android.support.v7.widget.RecyclerView
                 android:id="@+id/recySeriesPopulares"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
-                tools:listitem="@layout/activity_card_serie" />
+                tools:listitem="@layout/activity_card_serie" />-->
         </LinearLayout>
     </ScrollView>
 
