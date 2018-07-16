@@ -31,7 +31,7 @@ public class ExploreFragment extends Fragment {
     public void getSeries() {
         ClientSerie clientSerie = ClientFactory.getClientSerieInstance(this.getActivity().getApplicationContext());
 
-        SharedPreferences sharedPref = this.getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("csd", Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
         clientSerie.getSeries(token, new Response.Listener<String>() {
