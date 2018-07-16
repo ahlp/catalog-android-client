@@ -36,7 +36,8 @@ public class Login extends AppCompatActivity {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String token = sharedPref.getString(getString(R.string.token_pref_key), "");
 
-        if(!token.equals("")) {
+        if(true) {
+        //if(!token.equals("")) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
