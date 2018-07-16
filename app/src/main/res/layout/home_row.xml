@@ -19,6 +19,7 @@
         android:layout_toRightOf="@+id/rowImage"
         android:layout_gravity="center_vertical"
         android:textColor="#2F2F2F"
+        android:paddingTop="10dp"
         android:textSize="16dp" />
 
     <TextView
