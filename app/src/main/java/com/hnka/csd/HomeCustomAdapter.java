@@ -19,6 +19,7 @@ public class HomeCustomAdapter extends BaseAdapter {
     private static final int TYPE_HEADER = 1;
 
     private ArrayList<HomeObject> data = new ArrayList<>();
+    private ArrayList<HomeObject> backupData = null;
     private TreeSet<Integer> sectionHeader = new TreeSet<>();
 
     private LayoutInflater inflater;
@@ -104,5 +105,25 @@ public class HomeCustomAdapter extends BaseAdapter {
         public TextView titleText;
         public TextView subtitleText;
         public ImageView imageThumb;
+    }
+
+    public void search(String input){
+        if(backupData == null) backupData = data;
+
+        if(input == "") data = backupData;
+        else {
+            ArrayList<HomeObject> tempData = data;
+            data = new ArrayList<>();
+
+            for(int i = 0; i < tempData.size(); ++i) {
+                String texto = tempData.get(i).getTitle();
+                String procurarPor = input;
+                if(texto.toLowerCase().contains(procurarPor.toLowerCase())){
+                    data.add(tempData.get(i));
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }
