@@ -1,6 +1,7 @@
 package com.hnka.csd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,12 +31,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreFragment extends ListFragment {
+public class ExploreFragment extends ListFragment implements AdapterView.OnItemClickListener {
     public ExploreFragment() {};
-
-//    public EditText inputText;
-//    public List<Serie> series = new ArrayList<Serie>();
-//    public ListView recySeries;
 
     private HomeCustomAdapter adapter;
 
@@ -48,7 +46,16 @@ public class ExploreFragment extends ListFragment {
 
         adapter = new HomeCustomAdapter(this.getContext());
         setListAdapter(adapter);
+        getListView().setOnItemClickListener(this);
         new RecuperarSeries().execute();
+    }
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        HomeObject object = adapter.getItem(position);
+
+        Intent intent = new Intent(this.getContext(), SerieDetail.class);
+        intent.putExtra("id", String.valueOf(object.getId()));
+        startActivity(intent);
     }
 
     private class RecuperarSeries extends AsyncTask<Void, Void, String> {
@@ -84,7 +91,6 @@ public class ExploreFragment extends ListFragment {
                         JsonObject serieObject = seriesElement.get(i).getAsJsonObject();
                         Serie newSerie = new Serie(serieObject);
                         adapter.addItem(new HomeObject(Integer.parseInt(newSerie.getId()), newSerie.getTitle(), "", newSerie.getPoster_link()));
-                        System.out.println("ADAPTER LOOP");
                     }
 
                 }
