@@ -67,12 +67,10 @@ public class ExploreFragment extends ListFragment implements AdapterView.OnItemC
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(getActivity().getApplicationContext(), "recuperando series...", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(getActivity().getApplicationContext(), "terminando...", Toast.LENGTH_SHORT).show();
         }
 
         public void getSeries() {
