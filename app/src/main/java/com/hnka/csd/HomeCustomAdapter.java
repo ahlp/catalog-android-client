@@ -19,7 +19,6 @@ public class HomeCustomAdapter extends BaseAdapter {
     private static final int TYPE_HEADER = 1;
 
     private ArrayList<HomeObject> data = new ArrayList<>();
-    private ArrayList<HomeObject> backupData = null;
     private TreeSet<Integer> sectionHeader = new TreeSet<>();
 
     private LayoutInflater inflater;
@@ -108,10 +107,11 @@ public class HomeCustomAdapter extends BaseAdapter {
     }
 
     public void search(String input){
-        if(backupData == null) backupData = data;
 
-        if(input == "") data = backupData;
-        else {
+        if (input.equals("")) {
+            data = new ArrayList<>();
+            notifyDataSetChanged();
+        } else {
             ArrayList<HomeObject> tempData = data;
             data = new ArrayList<>();
 
@@ -122,8 +122,9 @@ public class HomeCustomAdapter extends BaseAdapter {
                     data.add(tempData.get(i));
                 }
             }
+
+            notifyDataSetChanged();
         }
 
-        notifyDataSetChanged();
     }
 }
