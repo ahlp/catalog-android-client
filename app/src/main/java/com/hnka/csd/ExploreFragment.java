@@ -32,9 +32,11 @@ import java.util.List;
 public class ExploreFragment extends ListFragment {
     public ExploreFragment() {};
 
-    public EditText inputText;
-    public List<Serie> series = new ArrayList<Serie>();
-    public ListView recySeries;
+//    public EditText inputText;
+//    public List<Serie> series = new ArrayList<Serie>();
+//    public ListView recySeries;
+
+    private HomeCustomAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_explore, container, false);
@@ -43,6 +45,9 @@ public class ExploreFragment extends ListFragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        adapter = new HomeCustomAdapter(this.getContext());
+        setListAdapter(adapter);
         new RecuperarSeries().execute();
     }
 
@@ -61,9 +66,6 @@ public class ExploreFragment extends ListFragment {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(getActivity().getApplicationContext(), "terminando...", Toast.LENGTH_SHORT).show();
-
-            AdapterSerie adapterSerie = new AdapterSerie(getActivity(), series);
-            setListAdapter(adapterSerie);
         }
 
         public void getSeries() {
@@ -81,7 +83,8 @@ public class ExploreFragment extends ListFragment {
                     for(int i = 0; i < seriesElement.size(); ++i){
                         JsonObject serieObject = seriesElement.get(i).getAsJsonObject();
                         Serie newSerie = new Serie(serieObject);
-                        series.add(newSerie);
+                        adapter.addItem(new HomeObject(Integer.parseInt(newSerie.getId()), newSerie.getTitle(), "", newSerie.getPoster_link()));
+                        System.out.println("ADAPTER LOOP");
                     }
 
                 }

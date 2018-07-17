@@ -36,7 +36,7 @@ public class AdapterSerie extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View newView = activity.getLayoutInflater().inflate(R.layout.fragment_explore_index, parent, false);
+        View newView = activity.getLayoutInflater().inflate(R.layout.content_card_serie, parent, false);
         Serie serie = series.get(position);
 
         //Recupera os elementos do layout
